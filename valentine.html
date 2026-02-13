@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine's Day</title>
+    <link rel="stylesheet" href="valentine.css">
+</head>
+<body>
+
+    <div id="setup">
+        <h2>Hapy Valentine's Day</h2>
+        <p>Unlock this first😊 </p>
+        <input type="text" id="chocolateInput" placeholder="What is my favorite chocolate? ">
+        <button onclick="checkChocolate()">Unlock</button>
+    </div>
+
+    <div id="main-content" class="hidden">
+        <div class="envelope-wrapper" id="envelopeWrapper" onclick="toggleLetter()">
+            <div class="flap"></div>
+            <div class="letter">
+                <h3 class="valentine-title">For My Girl/Enemy ❤️ </h3>
+                <p class="valentine-message"> Love is always worth fighting for. So be Strong</p>
+                <p class="valentine-ask">Happy Valentine's Day</p>
+            </div>
+            <div class="envelope"></div>
+        </div>
+        <p class="instruction" id="hint-text">Click the envelope to open!</p>        
+    </div>
+
+    <script src="valentine.js"></script>
+</body>
+</html>
+
+

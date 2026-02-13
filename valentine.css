@@ -1,0 +1,158 @@
+:root{
+    --bg-1: #ffeef0;
+    --bg-2: #fff4f6;
+    --accent: #d12d2d;
+    --accent-dark: #a82323;
+    --card: #ffffff;
+    --muted: #6b6b6b;
+}
+
+*{box-sizing: border-box}
+
+body{
+    margin:0;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:32px;
+    background: linear-gradient(180deg,var(--bg-1),var(--bg-2));
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+}
+
+#setup, #main-content{
+    width:100%;
+    max-width:760px;
+    background:var(--card);
+    padding:28px;
+    border-radius:14px;
+    box-shadow: 0 8px 30px rgba(16,24,40,0.08);
+    text-align:center;
+}
+
+#setup h2{ margin:0 0 8px 0; color:var(--accent-dark); }
+#setup p{ margin:0 0 16px 0; color:var(--muted) }
+
+input[type="text"]{
+    width:100%;
+    padding:12px 14px;
+    border:1.5px solid rgba(209,45,45,0.22);
+    border-radius:8px;
+    outline:none;
+    font-size:15px;
+    transition: box-shadow .18s ease, transform .12s ease, border-color .12s ease;
+}
+
+input[type="text"]:focus{
+    box-shadow: 0 6px 18px rgba(209,45,45,0.08);
+    transform: translateY(-1px);
+    border-color: var(--accent);
+}
+
+button{
+    display:inline-block;
+    margin-top:12px;
+    padding:10px 20px;
+    background: linear-gradient(180deg,var(--accent),var(--accent-dark));
+    color:#fff;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:600;
+    box-shadow: 0 6px 18px rgba(209,45,45,0.18);
+    transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+}
+
+button:hover{ transform: translateY(-2px); }
+button:active{ transform: translateY(0); opacity: .95 }
+button:focus{ outline: 3px solid rgba(209,45,45,0.14) }
+
+.hidden{ display:none !important }
+
+/* Envelope area */
+.envelope-wrapper{
+    width:100%;
+    max-width:320px;
+    margin: 6px auto 0 auto;
+    position:relative;
+    perspective:900px;
+    cursor:pointer;
+}
+
+.envelope{
+    width:100%;
+    height:180px;
+    background: linear-gradient(180deg,var(--accent),var(--accent-dark));
+    border-bottom-left-radius:12px;
+    border-bottom-right-radius:12px;
+    position:relative;
+    z-index:2;
+    box-shadow: 0 14px 40px rgba(16,24,40,0.12), inset 0 -6px 16px rgba(0,0,0,0.08);
+}
+
+.flap{
+    position:absolute;
+    top:0; left:0; right:0;
+    margin:0 auto;
+    width:0; height:0;
+    border-left:160px solid transparent;
+    border-right:160px solid transparent;
+    border-top:120px solid var(--accent-dark);
+    transform-origin: center top;
+    transition: transform .56s cubic-bezier(.2,.9,.3,1), z-index .2s;
+    z-index:4;
+    transform-style: preserve-3d;
+}
+
+.letter{
+    position:absolute;
+    bottom:8px;
+    left:12px;
+    width: calc(100% - 24px);
+    height:152px;
+    background:var(--card);
+    padding:16px;
+    border-radius:8px;
+    box-shadow: 0 12px 30px rgba(16,24,40,0.08);
+    transition: transform .8s cubic-bezier(.2,.9,.3,1), box-shadow .2s;
+    z-index:1;
+    text-align:center;
+}
+
+.envelope-wrapper.open .letter{
+    transform: translateY(-140px);
+    z-index:3;
+}
+
+.envelope-wrapper.open .flap{
+    transform: rotateX(180deg);
+    z-index:0;
+}
+
+.valentine-title{ color:var(--accent); margin:0; font-size:18px }
+.valentine-message{ font-size:15px; color:var(--muted); margin:8px 0 }
+.valentine-ask{ font-weight:700; margin-top:10px; color:var(--accent-dark) }
+
+.instruction{ margin-top:14px; color:var(--accent); font-weight:700 }
+
+/* Subtle floating to make it lively */
+.envelope-wrapper{ animation: float 6s ease-in-out infinite; }
+@keyframes float{
+    0%{ transform: translateY(0) }
+    50%{ transform: translateY(-6px) }
+    100%{ transform: translateY(0) }
+}
+
+/* Responsive tweaks */
+@media (max-width:420px){
+    .flap{ border-left:120px solid transparent; border-right:120px solid transparent; border-top:90px solid var(--accent-dark) }
+    .envelope{ height:160px }
+    .letter{ height:140px }
+}
+
+/* Respect user motion preference */
+@media (prefers-reduced-motion: reduce){
+    .envelope-wrapper, .flap, .letter, button, input{ transition:none !important; animation:none !important }
+}
